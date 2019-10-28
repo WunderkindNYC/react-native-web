@@ -1,31 +1,20 @@
 {
-  "private": true,
-  "version": "0.11.7",
-  "name": "react-native-web-monorepo",
-  "module": "packages/react-native-web/dist/index.js",
-  "main": "packages/react-native-web/dist/cjs/index.js",
-  "scripts": {
-    "clean": "del-cli ./packages/*/dist",
-    "compile": "npm-run-all clean -p \"compile:* -- {@}\" --",
-    "compile:commonjs": "cd packages/react-native-web && cross-env BABEL_ENV=commonjs babel --root-mode upward src --out-dir dist/cjs --ignore \"**/__tests__\"",
-    "compile:es": "cd packages/react-native-web && babel --root-mode upward src --out-dir dist --ignore \"**/__tests__\"",
-    "benchmarks": "cd packages/benchmarks && yarn build",
-    "benchmarks:release": "cd packages/benchmarks && yarn release",
-    "examples": "cd packages/examples && yarn build",
-    "examples:release": "cd packages/examples && yarn release",
-    "website": "cd packages/website && yarn start",
-    "website:release": "cd packages/website && yarn release",
-    "flow": "flow",
-    "fmt": "prettier --write \"**/*.js\"",
-    "jest": "jest --config ./scripts/jest/config.js",
-    "lint": "yarn lint:check --fix",
-    "lint:check": "eslint packages scripts",
-    "precommit": "lint-staged",
-    "prerelease": "yarn test && yarn compile && yarn compile:commonjs",
-    "release": "node ./scripts/release/publish.js",
-    "postrelease": "yarn benchmarks:release && yarn examples:release && yarn website:release",
-    "test": "yarn flow && yarn lint:check && yarn jest --runInBand"
+  "publishConfig": {
+    "registry": "https://registry.npmjs.org/"
   },
+  "name": "react-native-web",
+  "version": "0.11.7",
+  "description": "React Native for Web",
+  "module": "dist/index.js",
+  "main": "dist/cjs/index.js",
+  "sideEffects": false,
+  "files": [
+    "dist",
+    "jest",
+    "jest-preset.js",
+    "src",
+    "!**/__tests__"
+  ],
   "dependencies": {
     "array-find-index": "^1.0.2",
     "create-react-class": "^15.6.2",
@@ -42,62 +31,19 @@
     "react": ">=16.5.1",
     "react-dom": ">=16.5.1"
   },
-  "devDependencies": {
-    "@babel/cli": "^7.2.3",
-    "@babel/core": "^7.2.2",
-    "@babel/plugin-proposal-class-properties": "^7.2.3",
-    "@babel/plugin-proposal-object-rest-spread": "^7.2.0",
-    "@babel/preset-env": "^7.2.3",
-    "@babel/preset-flow": "^7.0.0",
-    "@babel/preset-react": "^7.0.0",
-    "babel-eslint": "^10.0.0",
-    "babel-jest": "24.0.0-alpha.9",
-    "babel-loader": "^8.0.0",
-    "babel-plugin-add-module-exports": "^1.0.0",
-    "babel-plugin-transform-react-remove-prop-types": "^0.4.21",
-    "caniuse-api": "^2.0.0",
-    "cross-env": "^5.2.0",
-    "del-cli": "^1.1.0",
-    "enzyme": "^3.6.0",
-    "enzyme-adapter-react-16": "^1.5.0",
-    "enzyme-to-json": "^3.3.3",
-    "eslint": "^5.11.1",
-    "eslint-config-prettier": "^3.3.0",
-    "eslint-plugin-promise": "^4.0.1",
-    "eslint-plugin-react": "^7.7.0",
-    "flow-bin": "^0.95.1",
-    "glob": "^7.1.2",
-    "husky": "^0.14.3",
-    "inline-style-prefixer": "^5.0.3",
-    "jest": "24.0.0-alpha.9",
-    "jest-canvas-mock": "^1.0.2",
-    "lint-staged": "^7.1.0",
-    "metro-react-native-babel-preset": "^0.51.0",
-    "npm-run-all": "^4.1.3",
-    "prettier": "^1.12.1",
-    "react": "^16.7.0",
-    "react-dom": "^16.7.0",
-    "react-test-renderer": "^16.7.0"
-  },
-  "workspaces": [
-    "packages/*"
-  ],
-  "lint-staged": {
-    "packages/react-native-web/src/index.js": [
-      "node ./scripts/babel/createModuleMap.js",
-      "prettier --write ./packages/babel-plugin-react-native-web/src/moduleMap.js",
-      "git add ./packages/babel-plugin-react-native-web/src/moduleMap.js"
-    ],
-    "**/*.js": [
-      "prettier --write",
-      "git update-index --again",
-      "eslint"
-    ]
-  },
-  "prettier": {
-    "printWidth": 100,
-    "singleQuote": true
-  },
   "author": "Nicolas Gallagher",
-  "license": "MIT"
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/necolas/react-native-web.git"
+  },
+  "tags": [
+    "react"
+  ],
+  "keywords": [
+    "react",
+    "react-component",
+    "react-native",
+    "web"
+  ]
 }
