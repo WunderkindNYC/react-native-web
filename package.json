@@ -2,6 +2,8 @@
   "private": true,
   "version": "0.11.7",
   "name": "react-native-web-monorepo",
+  "module": "packages/react-native-web/dist/index.js",
+  "main": "packages/react-native-web/dist/cjs/index.js",
   "scripts": {
     "clean": "del-cli ./packages/*/dist",
     "compile": "npm-run-all clean -p \"compile:* -- {@}\" --",
@@ -23,6 +25,22 @@
     "release": "node ./scripts/release/publish.js",
     "postrelease": "yarn benchmarks:release && yarn examples:release && yarn website:release",
     "test": "yarn flow && yarn lint:check && yarn jest --runInBand"
+  },
+  "dependencies": {
+    "array-find-index": "^1.0.2",
+    "create-react-class": "^15.6.2",
+    "debounce": "^1.2.0",
+    "deep-assign": "^3.0.0",
+    "fbjs": "^1.0.0",
+    "hyphenate-style-name": "^1.0.2",
+    "inline-style-prefixer": "^5.0.3",
+    "normalize-css-color": "^1.0.2",
+    "prop-types": "^15.6.0",
+    "react-timer-mixin": "^0.13.4"
+  },
+  "peerDependencies": {
+    "react": ">=16.5.1",
+    "react-dom": ">=16.5.1"
   },
   "devDependencies": {
     "@babel/cli": "^7.2.3",
